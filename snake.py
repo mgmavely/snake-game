@@ -1,16 +1,13 @@
 from turtle import Turtle
+START = [0, -20, -40]
 
 
 class Snake:
 
     def __init__(self):
         self.segments = []
-        for i in range(3):
-            snake_square = Turtle("square")
-            snake_square.color("White")
-            snake_square.penup()
-            snake_square.goto((-20 * i), 0)
-            self.segments.append(snake_square)
+        for i in START:
+            self.add_segment((i, 0))
         self.head = self.segments[0]
 
     def move(self):
@@ -33,3 +30,13 @@ class Snake:
     def right(self):
         if self.head.heading() != 180:
             self.head.setheading(0)
+
+    def extend(self):
+        self.add_segment(self.segments[-1].position())
+
+    def add_segment(self, position):
+        snake_square = Turtle("square")
+        snake_square.color("White")
+        snake_square.penup()
+        snake_square.goto(position)
+        self.segments.append(snake_square)
