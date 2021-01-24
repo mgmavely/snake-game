@@ -6,9 +6,12 @@ class Snake:
 
     def __init__(self):
         self.segments = []
+        self.create_snake()
+        self.head = self.segments[0]
+
+    def create_snake(self):
         for i in START:
             self.add_segment((i, 0))
-        self.head = self.segments[0]
 
     def move(self):
         for i in range(len(self.segments) - 1, 0, -1):
@@ -19,7 +22,7 @@ class Snake:
         if self.head.heading() != 270:
             self.head.setheading(90)
 
-    def left(self):
+    def lt(self):
         if self.head.heading() != 0:
             self.head.setheading(180)
 
@@ -27,7 +30,7 @@ class Snake:
         if self.head.heading() != 90:
             self.head.setheading(270)
 
-    def right(self):
+    def rt(self):
         if self.head.heading() != 180:
             self.head.setheading(0)
 
@@ -40,3 +43,10 @@ class Snake:
         snake_square.penup()
         snake_square.goto(position)
         self.segments.append(snake_square)
+
+    def rst(self):
+        for i in self.segments:
+            i.hideturtle()
+        self.segments.clear()
+        self.create_snake()
+        self.head = self.segments[0]
